@@ -29,16 +29,18 @@ function * seed () {
       avatar: '',
       createTime: new Date()
     })
-    yield user.save().catch(err => {
-      utils.logger.error(err)
-      throw (new Error('数据seed失败,请debug后重新启动'))
-    })
   }
+
+  yield user.save().catch(err => {
+    utils.logger.error(err)
+    throw (new Error('数据seed失败,请debug后重新启动'))
+  })
 }
 
 function * create (next) {
-  const username = this.request.body.username,
-    password = this.request.body.password
+  const username = this.request.body.username
+  const password = this.request.body.password
+
   let user = yield User.findOne({
     username
   }).exec()

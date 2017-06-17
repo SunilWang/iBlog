@@ -3,8 +3,8 @@ var webpack = require('webpack')
 var config = require('../config')
 var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
-console.log(path.resolve(__dirname, '../src/assets'));
-console.log(path.resolve(__dirname, '../src/components'));
+console.log(path.resolve(__dirname, '../src/assets'))
+console.log(path.resolve(__dirname, '../src/components'))
 
 module.exports = {
   entry: {
@@ -69,9 +69,9 @@ module.exports = {
     loaders: utils.cssLoaders()
   },
   plugins: [
-    //[fetch polyfill](https://github.com/github/fetch)
+    // [fetch polyfill](https://github.com/github/fetch)
     new webpack.ProvidePlugin({
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    }),
+    })
   ]
 }

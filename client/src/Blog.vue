@@ -10,7 +10,6 @@
       </router-view>
     </main>
     <footer class="copyright">
-      <p>本站仅供学习和交流，如有侵权请联系：ahwangshu@qq.com</p>
       <p>Copyright © 2012-2017 .All right reserved. 皖ICP备14010130号-3<p>
     </footer>
   </div>

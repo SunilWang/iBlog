@@ -1,9 +1,7 @@
-/**
- *  16/7/30.
- */
+
 import Vue from 'vue'
 import Vuex from 'vuex'
-//import createLogger from 'vuex/logger'
+// import createLogger from 'vuex/logger'
 // 今天更新了一下node_modules
 // 结果发现从cnpm上安装的vuex 删除了logger.js文件,增加了用typescript写的logger.d.ts,
 // 所以此处删除了对这个logger的使用

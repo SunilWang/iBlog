@@ -1,29 +1,24 @@
-/**
- *  16/9/7.
- */
 /* 封装fetch */
+
 function parseResponse (response) {
-  return Promise.all([response.status,response.statusText, response.json()])
+  return Promise.all([response.status, response.statusText, response.json()])
 }
 
-function checkStatus ([status,statusText,data]) {
-  if(status >= 200 && status < 300){
-    return data;
-  }else{
-    let error = new Error(statusText);
-    error.status = status;
-    error.error_message = data;
-    return Promise.reject(error);
+function checkStatus ([status, statusText, data]) {
+  if (status >= 200 && status < 300) {
+    return data
+  } else {
+    let error = new Error(statusText)
+    error.status = status
+    error.error_message = data
+    return Promise.reject(error)
   }
 }
 
-
-
 export default{
   get (url, param = {}, headers = {}, host = process.env.api) {
-
     let reqHeaders = new Headers()
-    reqHeaders.append('Accept', 'application/json');
+    reqHeaders.append('Accept', 'application/json')
     var query = []
     Object.keys(param).forEach((item) => {
       query.push(`${item}=${encodeURIComponent(param[item])}`)
@@ -34,9 +29,9 @@ export default{
     var init = {
       method: 'GET',
       headers: reqHeaders,
-      credentials:"include",
+      credentials: 'include',
       cache: 'default',
-      mode:'cors'
+      mode: 'cors'
     }
     return fetch(url, init)
       .then(parseResponse)
@@ -52,8 +47,8 @@ export default{
     var init = {
       method: 'PATCH',
       headers: reqHeaders,
-      credentials:"include",
-      mode:'cors',
+      credentials: 'include',
+      mode: 'cors',
       body: JSON.stringify(param)
     }
 
@@ -70,8 +65,8 @@ export default{
     var init = {
       method: 'POST',
       headers: reqHeaders,
-      credentials:"include",
-      mode:'cors',
+      credentials: 'include',
+      mode: 'cors',
       body: JSON.stringify(param)
     }
 
@@ -89,8 +84,8 @@ export default{
     var init = {
       method: 'PUT',
       headers: reqHeaders,
-      credentials:"include",
-      mode:'cors',
+      credentials: 'include',
+      mode: 'cors',
       body: JSON.stringify(param)
     }
 
@@ -107,9 +102,9 @@ export default{
 
     var init = {
       method: 'DELETE',
-      credentials:"include",
+      credentials: 'include',
       headers: reqHeaders,
-      mode:'cors'
+      mode: 'cors'
     }
 
     return fetch(url, init)

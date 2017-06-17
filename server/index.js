@@ -1,3 +1,4 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
 const config = require('./configs/index')
 // const path = require('path')
@@ -59,9 +60,9 @@ co(function * () {
   app.use(bodyParser())
   yield controllers.init(router)
   app.use(router.routes())
-  app.listen(config.app.port, () => {
-    utils.print('app is listening on port ' + config.app.port)
-  })
+
+  app.listen(config.app.port)
+  console.log(`app is listening on port ${config.app.port}`)
 }).catch(function (err) {
   utils.print(err.stack)
 })

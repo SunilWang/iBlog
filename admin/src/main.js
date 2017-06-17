@@ -1,6 +1,4 @@
-/**
- *  16/9/8.
- */
+
 import './stylus/index.styl'
 import Vue from 'vue'
 import VueRouter from 'vue-router'

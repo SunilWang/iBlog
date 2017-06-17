@@ -12,7 +12,7 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 
 module.exports = merge(baseWebpackConfig, {
   output: {
-    publicPath: config.dev.assetsPublicPath,
+    publicPath: config.dev.assetsPublicPath
   },
   module: {
     loaders: utils.styleLoaders()
@@ -29,7 +29,7 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.NoErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      favicon:'./client/src/assets/img/fav.ico', //favicon路径
+      favicon: './client/src/assets/img/fav.ico', // favicon路径
       filename: 'index.html',
       template: './client/index.html',
       inject: true

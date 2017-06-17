@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import routes from './routes'
-import Blog from './Blog'
+import Blog from './Blog.vue'
 import {markdown} from './filters/index'
 import './stylus/index.styl'
 

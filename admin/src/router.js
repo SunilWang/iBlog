@@ -1,6 +1,4 @@
-/**
- *  16/9/8.
- */
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginView from 'components/Login/Login.vue'

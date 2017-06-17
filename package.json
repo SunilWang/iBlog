@@ -4,9 +4,11 @@
   "description": "This is SunilWang Blog",
   "author": "liucan",
   "scripts": {
+    "dev-build-client": "cross-env NODE_ENV=development node client/build/build.js",
+    "build-client": "cross-env NODE_ENV=production node client/build/build.js",
+    "dev-build-admin": "cross-env NODE_ENV=development node admin/build/build.js",
+    "build-admin": "cross-env NODE_ENV=production node admin/build/build.js",
     "dev-client": "node client/build/dev-server.js",
-    "build-client": "node client/build/build.js",
-    "build-admin": "node admin/build/build.js",
     "dev-admin": "node admin/build/dev-server.js",
     "dev-server": "cross-env NODE_ENV=development nodemon server/index.js"
   },

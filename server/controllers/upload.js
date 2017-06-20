@@ -12,7 +12,7 @@ qiniu.conf.ACCESS_KEY = qnConfig.ACCESS_KEY
 qiniu.conf.SECRET_KEY = qnConfig.SECRET_KEY
 
 module.exports.init = function (router) {
-  router.post('/upload/attachment', multer({dest: os.tmpdir()}), uploadAttachment)
+  router.post('/upload/attachment', mw.verify_token, multer({dest: os.tmpdir()}), uploadAttachment)
 }
 
 // 构建上传策略函数

@@ -31,7 +31,6 @@ router.redirect({
   '*': '/posts'
 })
 router.beforeEach(function ({from, to, next, redirect}) {
-  // console.log(store.state.token.token)
   if (to.authPage !== true) {
     if (store.state.token.token === null) {
       redirect('login')

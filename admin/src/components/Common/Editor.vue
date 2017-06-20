@@ -8,6 +8,7 @@
   import SimpleMDE from 'simplemde'
   require('../../assets/js/inline-attachment')
   require('../../assets/js/codemirror-4.inline-attachment')
+  import store from '../../vuex/store'
 
   let smde;
   export default{
@@ -42,7 +43,10 @@
       })
 
       inlineAttachment.editors.codemirror4.attach(smde.codemirror, {
-        uploadUrl: 'http://localhost:3300/api/upload/attachment'
+        uploadUrl: `${process.env.api}upload/attachment`,
+        extraHeaders: {
+          'Authorization': `Bearer ${store.state.token.token || ''}`
+        }
       })
     },
     beforeDestroy(){

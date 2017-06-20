@@ -10,5 +10,11 @@ module.exports = {
   },
   'jwt': {
     'cert': 'sunil-dev'
+  },
+  qiniu: {
+    ACCESS_KEY: '',
+    SECRET_KEY: '',
+    BUCKET: '',
+    DOMAIN: ''
   }
 }

@@ -266,6 +266,10 @@
   import service from '../../services/posts/index'
   import SimpleMDE from 'simplemde'
   import {_debounce,trim,marked} from '../../lib/utils'
+  require('../../assets/js/inline-attachment')
+  require('../../assets/js/codemirror-4.inline-attachment')
+  import store from '../../vuex/store'
+
   const updateTitleWithDebounce = _debounce(function(title){
       this.submitPostTitle(title).then(()=>{
         this.savePostTitle();
@@ -319,6 +323,14 @@
         }
         postDraft()
       });
+
+      inlineAttachment.editors.codemirror4.attach(smde.codemirror, {
+        uploadUrl: `${process.env.api}upload/attachment`,
+        extraHeaders: {
+          'Authorization': `Bearer ${store.state.token.token || ''}`
+        }
+      })
+
       this.change = true;
       if(null !== this.currentPostId){
         service.getDraft(this.currentPostId).then(res => {

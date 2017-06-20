@@ -54,5 +54,5 @@ function * uploadAttachment () {
     }
   }
 
-  this.body = {filename: `${qnConfig.DOMAIN}/${res.key}`}
+  this.body = {filename: `${qnConfig.DOMAIN}/${res.key}${qnConfig.IMAGE_STYLE}`}
 }

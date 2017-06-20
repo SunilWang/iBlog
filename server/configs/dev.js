@@ -12,6 +12,7 @@ module.exports = {
     'cert': 'sunil-dev'
   },
   qiniu: {
+    IMAGE_STYLE: '-sy_sunil_wang_01',
     ACCESS_KEY: '',
     SECRET_KEY: '',
     BUCKET: '',

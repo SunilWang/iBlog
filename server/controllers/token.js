@@ -1,7 +1,6 @@
 
 const jwt = require('jsonwebtoken')
 const configs = require('../configs/index')
-const utils = require('../utils/index')
 const mw = require('../middlewares/index.js')
 const md5 = require('md5')
 const cert = configs.jwt.cert
@@ -17,7 +16,7 @@ module.exports.init = function * (router) {
 // 初始密码:'password'
 function * seed () {
   let user = yield User.find().exec().catch(err => {
-    utils.logger.error(err)
+    console.error(err)
     throw (new Error('数据seed失败,请debug后重新启动'))
   })
 
@@ -25,7 +24,6 @@ function * seed () {
     return
   }
 
-  // utils.print(user);
   user = new User({
     name: 'admin',
     username: 'admin',
@@ -35,18 +33,20 @@ function * seed () {
   })
 
   yield user.save().catch(err => {
-    utils.logger.error(err)
+    console.error(err)
     throw (new Error('数据seed失败,请debug后重新启动'))
   })
 }
 
 function * create (next) {
+  let logger = this.app.logger
   const username = this.request.body.username
   const password = this.request.body.password
 
   let user = yield User.findOne({
     username
   }).exec()
+  console.log(this.request.body)
   if (user !== null) {
     if (user.password === password) {
       const token = jwt.sign({
@@ -54,7 +54,7 @@ function * create (next) {
         name: user.name,
         exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60// 1 hours
       }, cert)
-      utils.print(token)
+      logger.info(token)
       this.status = 200
       this.body = {
         success: true,

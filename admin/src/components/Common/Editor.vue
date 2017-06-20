@@ -6,6 +6,9 @@
 <script>
   import {marked} from '../../lib/utils'
   import SimpleMDE from 'simplemde'
+  require('../../assets/js/inline-attachment')
+  require('../../assets/js/codemirror-4.inline-attachment')
+
   let smde;
   export default{
     data(){
@@ -29,12 +32,17 @@
         },
         spellChecker:false
       });
+
       smde.codemirror.on("change", ()=>{
         let value = smde.value();
         if(this.content === value){
           return
         }
         this.content = value;
+      })
+
+      inlineAttachment.editors.codemirror4.attach(smde.codemirror, {
+        uploadUrl: 'http://localhost:3300/api/upload/attachment'
       })
     },
     beforeDestroy(){

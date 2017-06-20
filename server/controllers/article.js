@@ -68,7 +68,7 @@ function * create () {
   }
 }
 
-function * articleList (next) {
+function * articleList () {
   /**
    * @query tag  搜索包含指定标签的文章
    * @param page 文章列表页码 从1开始

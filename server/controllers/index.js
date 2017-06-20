@@ -2,6 +2,7 @@ const token = require('./token.js')
 const tag = require('./tag.js')
 const article = require('./article.js')
 const draft = require('./draft.js')
+const upload = require('./upload.js')
 const publication = require('./publication')
 const me = require('./me')
 
@@ -11,6 +12,7 @@ module.exports.init = function * (router) {
   article.init(router)
   draft.init(router)
   publication.init(router)
+  upload.init(router)
   yield me.init(router)
 
   // 指定404动作

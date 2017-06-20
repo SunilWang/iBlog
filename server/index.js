@@ -2,7 +2,6 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
 const config = require('./configs/index')
 const co = require('co')
-const os = require('os')
 const app = require('koa')()
 const bodyParser = require('koa-bodyparser')
 const cors = require('koa-cors')
@@ -14,7 +13,6 @@ const onerror = require('koa-onerror')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 const controllers = require('./controllers/index.js')
-const multer = require('koa-multer')
 
 // 如果你的node版本高于4.0 ,可以使用node自带promise
 mongoose.Promise = global.Promise
@@ -55,7 +53,6 @@ app.on('error', function (err, ctx) {
   }
   app.logger.error(err)
 })
-app.use(multer({dest: os.tmpdir()}))
 app.use(bodyParser())
 router.get('/hello', function () {
   this.body = {name: 'name'}

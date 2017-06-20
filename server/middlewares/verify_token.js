@@ -1,4 +1,3 @@
-const utils = require('../utils/index.js')
 const config = require('../configs/index.js')
 const jwt = require('jsonwebtoken')
 
@@ -17,7 +16,7 @@ module.exports = function * (next) {
     }
     this.throw(401, 'invalid token')
   }
-  utils.print('鉴权通过')
+  this.app.logger.info('鉴权通过')
   this.token = tokenContent
   return yield next
 }

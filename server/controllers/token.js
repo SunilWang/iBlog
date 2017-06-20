@@ -42,11 +42,10 @@ function * create (next) {
   let logger = this.app.logger
   const username = this.request.body.username
   const password = this.request.body.password
-
   let user = yield User.findOne({
     username
   }).exec()
-  console.log(this.request.body)
+
   if (user !== null) {
     if (user.password === password) {
       const token = jwt.sign({

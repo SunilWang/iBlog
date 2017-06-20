@@ -34,15 +34,15 @@ let config = {
     upload: path.join(serverRoot, 'resource', 'upload')
   }
 }
-// 本地调试环境
-if (process.env.NODE_ENV === 'development') {
-  config = _.merge(config, dev)
-}
+
 // 私有配置
 if (process.env.NODE_ENV === 'production') {
   if (fs.existsSync(`${__dirname}/private.js`)) {
     config = _.merge(config, require('./private.js'))
   }
+} else {
+  // 本地调试环境
+  config = _.merge(config, dev)
 }
 
 module.exports = config

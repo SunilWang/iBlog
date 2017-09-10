@@ -230,7 +230,6 @@
     if (typeof settings.setupFormData === 'function') {
       settings.setupFormData(formData, file)
     }
-
     // Attach the file. If coming from clipboard, add a default filename (only works in Chrome for now)
     // http://stackoverflow.com/questions/6664967/how-to-give-a-blob-uploaded-as-formdata-a-file-name
     if (file.name) {
@@ -241,6 +240,7 @@
     }
 
     var remoteFilename = 'image-' + Date.now() + '.' + extension
+    console.log(file)
     if (typeof settings.remoteFilename === 'function') {
       remoteFilename = settings.remoteFilename(file)
     }
@@ -305,7 +305,6 @@
     if (this.settings.onFileUploadResponse.call(this, xhr) !== false) {
       var result = JSON.parse(xhr.responseText),
         filename = result[this.settings.jsonFieldName]
-
       if (result && filename) {
         var newValue
         if (typeof this.settings.urlText === 'function') {
@@ -355,7 +354,6 @@
     var result = false,
       clipboardData = e.clipboardData,
       items
-
     if (typeof clipboardData === 'object') {
       items = clipboardData.items || clipboardData.files || []
 
@@ -370,7 +368,6 @@
     }
 
     if (result) { e.preventDefault() }
-
     return result
   }
 

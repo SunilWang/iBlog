@@ -88,3 +88,14 @@ export function _debounce (func, wait, immediate = false) {
 export function trim (text) {
   return text.replace(/(^\s*)|(\s*$)/g, '')
 }
+
+export function editorsUpload (inlineAttachment, smde, token = '', uploadUrl = `${process.env.api}upload/attachment`) {
+  inlineAttachment.editors.codemirror4.attach(smde.codemirror, {
+    uploadUrl,
+    extraHeaders: {
+      'Authorization': `Bearer ${token}`
+    },
+    defaultExtension: 'jpg',
+    progressText: '![正在上传图片中...]()'
+  })
+}

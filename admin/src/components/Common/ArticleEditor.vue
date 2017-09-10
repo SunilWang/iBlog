@@ -265,7 +265,7 @@
   import {postSaved,postTitle,postTitleSaved,currentPostId,articleIdOfPost} from '../../vuex/getters/post'
   import service from '../../services/posts/index'
   import SimpleMDE from 'simplemde'
-  import {_debounce,trim,marked} from '../../lib/utils'
+  import {_debounce, trim, marked, editorsUpload} from '../../lib/utils'
   require('../../assets/js/inline-attachment')
   require('../../assets/js/codemirror-4.inline-attachment')
   import store from '../../vuex/store'
@@ -324,12 +324,7 @@
         postDraft()
       });
 
-      inlineAttachment.editors.codemirror4.attach(smde.codemirror, {
-        uploadUrl: `${process.env.api}upload/attachment`,
-        extraHeaders: {
-          'Authorization': `Bearer ${store.state.token.token || ''}`
-        }
-      })
+      editorsUpload(inlineAttachment, smde, store.state.token.token)
 
       this.change = true;
       if(null !== this.currentPostId){

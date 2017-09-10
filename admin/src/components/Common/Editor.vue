@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-  import {marked} from '../../lib/utils'
+  import {marked, editorsUpload} from '../../lib/utils'
   import SimpleMDE from 'simplemde'
   require('../../assets/js/inline-attachment')
   require('../../assets/js/codemirror-4.inline-attachment')
@@ -42,12 +42,7 @@
         this.content = value;
       })
 
-      inlineAttachment.editors.codemirror4.attach(smde.codemirror, {
-        uploadUrl: `${process.env.api}upload/attachment`,
-        extraHeaders: {
-          'Authorization': `Bearer ${store.state.token.token || ''}`
-        }
-      })
+      editorsUpload(inlineAttachment, smde, store.state.token.token)
     },
     beforeDestroy(){
       smde.toTextArea();

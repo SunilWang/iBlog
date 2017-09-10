@@ -1,7 +1,6 @@
 <template>
   <!--高速版-->
   <div id="SOHUCS" sid="{{id}}"></div>
-  <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 </template>
 <script>
   export default {

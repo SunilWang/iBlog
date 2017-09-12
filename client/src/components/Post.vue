@@ -120,7 +120,7 @@
               body: window.href,
               labels: ['Gitalk']
             });
-
+            document.getElementById('gitalk-container').innerHTML = ''
             gitalk.render('gitalk-container');
           }
         }).catch(err=>{

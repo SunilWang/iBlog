@@ -82,6 +82,7 @@
 //        gitalk.render('gitalk-container');
 //      }
 //    },
+
     route:{
       data({to,from}){
         return service.getPost(to.params.postId).then(res=>{
@@ -117,6 +118,8 @@
               body: window.href,
               labels: ['Gitalk']
             });
+            console.log('gitalk.render')
+            document.getElementById('gitalk-container').innerHTML = ''
             gitalk.render('gitalk-container');
           }
         }).catch(err=>{

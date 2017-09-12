@@ -16,7 +16,9 @@
       </div>
     </article>
     <pagination :next="nextArticle !== null" :next-link="nextArticle?'/posts/'+nextArticle._id:''" :next-word="nextArticle&&nextArticle.title" :prev="prevArticle !== null" :prev-link="prevArticle?'/posts/'+prevArticle._id:''" :prev-word="prevArticle&&prevArticle.title" ></pagination>
-    <chang-yan :id="id"></chang-yan>
+    <div id="gitalk-container">
+
+    </div>
   </div>
 </template>
 <style lang="stylus">
@@ -41,16 +43,16 @@
           margin-left 5px
 </style>
 <script>
+  import 'gitalk/dist/gitalk.css'
+  import Gitalk from 'gitalk'
   import Pagination from './common/Pagination.vue'
   import Catalog from './common/Catalog.vue'
-  import ChangYan from './common/ChangYan.vue'
   import service from '../services/post/index'
   // import {markdown} from '../filters/index.js'
   export default {
     components:{
       Pagination,
-      Catalog,
-      ChangYan
+      Catalog
     },
     data () {
       return {
@@ -63,6 +65,20 @@
         'nextArticle':null,
         'prevArticle':null,
       }
+    },
+    ready(){
+      var gitalk = new Gitalk({
+        clientID: '604a98594e8838a93c55',
+        clientSecret: '5197cf08644f2580389bb23059c4abb4f0f0ced7',
+        repo: 'iBlog',
+        owner: 'SunilWang',
+        admin: ['SunilWang'],
+        id: this.id,
+        distractionFreeMode: true,
+        title: this.title,
+        body: window.href
+      });
+      gitalk.render('gitalk-container');
     },
     route:{
       data({to,from}){

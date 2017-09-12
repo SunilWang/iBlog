@@ -82,9 +82,6 @@
 //        gitalk.render('gitalk-container');
 //      }
 //    },
-    beforeDestroy: function () {
-      document.getElementById('gitalk-container').innerHTML = ''
-    },
     route:{
       data({to,from}){
         return service.getPost(to.params.postId).then(res=>{
@@ -121,6 +118,7 @@
               labels: ['Gitalk']
             });
             document.getElementById('gitalk-container').innerHTML = ''
+            document.getElementById('gitalk-container').innerText = ''
             gitalk.render('gitalk-container');
           }
         }).catch(err=>{

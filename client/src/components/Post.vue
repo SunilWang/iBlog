@@ -117,8 +117,6 @@
               body: window.href,
               labels: ['Gitalk']
             });
-            document.getElementById('gitalk-container').innerHTML = ''
-            document.getElementById('gitalk-container').innerText = ''
             gitalk.render('gitalk-container');
           }
         }).catch(err=>{

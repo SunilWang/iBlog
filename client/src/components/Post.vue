@@ -16,8 +16,7 @@
       </div>
     </article>
     <pagination :next="nextArticle !== null" :next-link="nextArticle?'/posts/'+nextArticle._id:''" :next-word="nextArticle&&nextArticle.title" :prev="prevArticle !== null" :prev-link="prevArticle?'/posts/'+prevArticle._id:''" :prev-word="prevArticle&&prevArticle.title" ></pagination>
-    <div id="gitalk-container">
-    </div>
+    <div id="gitalk-container"></div>
   </div>
 </template>
 <style lang="stylus">
@@ -65,6 +64,27 @@
         'prevArticle':null,
       }
     },
+//    watch: {
+//      id: function () {
+//        var gitalk = new Gitalk({
+//          clientID: '604a98594e8838a93c55',
+//          clientSecret: '5197cf08644f2580389bb23059c4abb4f0f0ced7',
+//          repo: 'iBlog',
+//          owner: 'SunilWang',
+//          admin: ['SunilWang'],
+//          id: this.id,
+//          distractionFreeMode: true,
+//          title: this.title,
+//          body: window.href,
+//          labels: ['Gitalk']
+//        });
+//
+//        gitalk.render('gitalk-container');
+//      }
+//    },
+    ready: function () {
+      console.log('beforeDestroy')
+    },
     route:{
       data({to,from}){
         return service.getPost(to.params.postId).then(res=>{
@@ -78,22 +98,6 @@
               this.prevArticle = res.data.prevArticle
               this.lastEditTime = res.data.lastEditTime
               this.tags = res.data.tags
-
-              var gitalk = new Gitalk({
-                clientID: '604a98594e8838a93c55',
-                clientSecret: '5197cf08644f2580389bb23059c4abb4f0f0ced7',
-                repo: 'iBlog',
-                owner: 'SunilWang',
-                admin: ['SunilWang'],
-                id: this.id,
-                distractionFreeMode: true,
-                title: this.title,
-                body: window.href,
-                labels: ['Gitalk']
-              });
-
-              gitalk.render('gitalk-container');
-              return
             }else{
               this.title = '404 not found';
               this.createTime = '';
@@ -104,6 +108,21 @@
               this.nextArticle = null;
               this.prevArticle = null;
             }
+            var gitalk = new Gitalk({
+              clientID: '604a98594e8838a93c55',
+              clientSecret: '5197cf08644f2580389bb23059c4abb4f0f0ced7',
+              repo: 'iBlog',
+              owner: 'SunilWang',
+              admin: ['SunilWang'],
+              id: this.id,
+              distractionFreeMode: true,
+              title: this.title,
+              body: window.href,
+              labels: ['Gitalk']
+            });
+
+            document.getElementById('gitalk-container').innerHTML = ''
+            gitalk.render('gitalk-container');
           }
         }).catch(err=>{
           alert('网络错误,请刷新重试');

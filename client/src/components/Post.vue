@@ -41,8 +41,8 @@
           margin-left 5px
 </style>
 <script>
-  import 'gitalk/dist/gitalk.css'
-  import Gitalk from 'gitalk'
+  // import 'gitalk/dist/gitalk.css'
+  // import Gitalk from 'gitalk'
   import Pagination from './common/Pagination.vue'
   import Catalog from './common/Catalog.vue'
   import service from '../services/post/index'

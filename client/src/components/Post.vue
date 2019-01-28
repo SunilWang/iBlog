@@ -96,6 +96,20 @@
               this.prevArticle = res.data.prevArticle
               this.lastEditTime = res.data.lastEditTime
               this.tags = res.data.tags
+
+              // var gitalk = new Gitalk({
+              //   clientID: '604a98594e8838a93c55',
+              //   clientSecret: '5197cf08644f2580389bb23059c4abb4f0f0ced7',
+              //   repo: 'iBlog',
+              //   owner: 'SunilWang',
+              //   admin: ['SunilWang'],
+              //   id: this.id,
+              //   distractionFreeMode: true,
+              //   title: this.title,
+              //   body: window.href,
+              //   labels: ['Gitalk']
+              // });
+              // gitalk.render('gitalk-container')
             }else{
               this.title = '404 not found';
               this.createTime = '';
@@ -106,21 +120,6 @@
               this.nextArticle = null;
               this.prevArticle = null;
             }
-            var gitalk = new Gitalk({
-              clientID: '604a98594e8838a93c55',
-              clientSecret: '5197cf08644f2580389bb23059c4abb4f0f0ced7',
-              repo: 'iBlog',
-              owner: 'SunilWang',
-              admin: ['SunilWang'],
-              id: this.id,
-              distractionFreeMode: true,
-              title: this.title,
-              body: window.href,
-              labels: ['Gitalk']
-            });
-            console.log('gitalk.render')
-            document.getElementById('gitalk-container').innerHTML = ''
-            gitalk.render('gitalk-container');
           }
         }).catch(err=>{
           alert('网络错误,请刷新重试');

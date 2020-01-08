@@ -87,8 +87,8 @@ export default {
   },
   ready: function() {
     var gitalk = new Gitalk({
-      clientID: '604a98594e8838a93c55',
-      clientSecret: '5197cf08644f2580389bb23059c4abb4f0f0ced7',
+      clientID: '32293f6b55beaa2e9337',
+      clientSecret: '3d8107efb8669aee4535ad9f824416484020a8a6',
       repo: 'iBlog',
       owner: 'SunilWang',
       admin: [

@@ -5,89 +5,130 @@
     <article class="post">
       <header id="header">
         <h1>{{title}}</h1>
-        <h4>
-          {{createTime}}
-        </h4>
+        <h4>{{createTime}}</h4>
       </header>
-      <p v-html="content | markdown" id="markdown-content">
-      </p>
+      <p v-html="content | markdown" id="markdown-content"></p>
       <div class="fix tag-list" style="margin: 20px 0;">
-        <span class="tag" v-for="tag in tags"><a v-link="'/tags'" class="tag-link active">{{tag.name}}</a></span>
+        <span class="tag" v-for="tag in tags">
+          <a v-link="'/tags'" class="tag-link active">{{tag.name}}</a>
+        </span>
       </div>
     </article>
-    <pagination :next="nextArticle !== null" :next-link="nextArticle?'/posts/'+nextArticle._id:''" :next-word="nextArticle&&nextArticle.title" :prev="prevArticle !== null" :prev-link="prevArticle?'/posts/'+prevArticle._id:''" :prev-word="prevArticle&&prevArticle.title" ></pagination>
+    <pagination
+      :next="nextArticle !== null"
+      :next-link="nextArticle?'/posts/'+nextArticle._id:''"
+      :next-word="nextArticle&&nextArticle.title"
+      :prev="prevArticle !== null"
+      :prev-link="prevArticle?'/posts/'+prevArticle._id:''"
+      :prev-word="prevArticle&&prevArticle.title"
+    ></pagination>
     <div id="gitalk-container"></div>
   </div>
 </template>
 <style lang="stylus">
-  @import "../stylus/_settings.styl"
-  .tag-list
-    .tag
-      float left
-      margin-bottom 5px
-      a.tag-link
-        color $light
-        border-bottom 2px solid $light
-        &:hover,&.active
-          color $green
-          border-bottom 2px solid $green
-      &+.tag
-        margin-left 20px
-  @media screen and (max-width: 720px)
-    .tag-list
-      .tag
-        margin: 0 5px 5px;
-        &+.tag
-          margin-left 5px
+@import '../stylus/_settings.styl';
+
+.tag-list {
+  .tag {
+    float: left;
+    margin-bottom: 5px;
+
+    a.tag-link {
+      color: $light;
+      border-bottom: 2px solid $light;
+
+      &:hover, &.active {
+        color: $green;
+        border-bottom: 2px solid $green;
+      }
+    }
+
+    &+.tag {
+      margin-left: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .tag-list {
+    .tag {
+      margin: 0 5px 5px;
+
+      &+.tag {
+        margin-left: 5px;
+      }
+    }
+  }
+}
 </style>
 <script>
-  // import 'gitalk/dist/gitalk.css'
-  // import Gitalk from 'gitalk'
-  import Pagination from './common/Pagination.vue'
-  import Catalog from './common/Catalog.vue'
-  import service from '../services/post/index'
-  // import {markdown} from '../filters/index.js'
-  export default {
-    components:{
-      Pagination,
-      Catalog
-    },
-    data () {
-      return {
-        'id':'',
-        'title': '',
-        'createTime': '',
-        'content': '',
-        'lastEditTime': null,
-        'tags': [],
-        'nextArticle':null,
-        'prevArticle':null,
-      }
-    },
-//    watch: {
-//      id: function () {
-//        var gitalk = new Gitalk({
-//          clientID: '604a98594e8838a93c55',
-//          clientSecret: '5197cf08644f2580389bb23059c4abb4f0f0ced7',
-//          repo: 'iBlog',
-//          owner: 'SunilWang',
-//          admin: ['SunilWang'],
-//          id: this.id,
-//          distractionFreeMode: true,
-//          title: this.title,
-//          body: window.href,
-//          labels: ['Gitalk']
-//        });
-//
-//        gitalk.render('gitalk-container');
-//      }
-//    },
+import 'gitalk/dist/gitalk.css'
+import Gitalk from 'gitalk'
+import Pagination from './common/Pagination.vue'
+import Catalog from './common/Catalog.vue'
+import service from '../services/post/index'
+// import {markdown} from '../filters/index.js'
+export default {
+  components: {
+    Pagination,
+    Catalog
+  },
+  data() {
+    return {
+      id: '',
+      title: '',
+      createTime: '',
+      content: '',
+      lastEditTime: null,
+      tags: [],
+      nextArticle: null,
+      prevArticle: null
+    }
+  },
+  ready: function() {
+    var gitalk = new Gitalk({
+      clientID: '604a98594e8838a93c55',
+      clientSecret: '5197cf08644f2580389bb23059c4abb4f0f0ced7',
+      repo: 'iBlog',
+      owner: 'SunilWang',
+      admin: [
+        'SunilWang'
+      ],
+      id: this.id,
+      distractionFreeMode: true, // Facebook-like distraction free mode
+      title: this.title,
+      body: window.href,
+      labels: ['Gitalk']
+    })
 
-    route:{
-      data({to,from}){
-        return service.getPost(to.params.postId).then(res=>{
-          if(res.success === true ){
-            if(null !== res.data){
+    gitalk.render('gitalk-container')
+  },
+  //    watch: {
+  //      id: function () {
+  //        var gitalk = new Gitalk({
+  //          clientID: '604a98594e8838a93c55',
+  //          clientSecret: '5197cf08644f2580389bb23059c4abb4f0f0ced7',
+  //          repo: 'iBlog',
+  //          owner: 'SunilWang',
+  //          admin: ['SunilWang'],
+  //          id: this.id,
+  //          distractionFreeMode: true,
+  //          title: this.title,
+  //          body: window.href,
+  //          labels: ['Gitalk']
+  //        });
+  //
+  //        gitalk.render('gitalk-container');
+  //      }
+  //    },
+
+  route: {
+    data({ to, from }) {
+      return service
+        .getPost(to.params.postId)
+        .then(res => {
+          if (res.success === true) {
+            if (null !== res.data) {
               this.id = res.data._id
               this.title = res.data.title
               this.createTime = res.data.createTime
@@ -96,35 +137,22 @@
               this.prevArticle = res.data.prevArticle
               this.lastEditTime = res.data.lastEditTime
               this.tags = res.data.tags
-
-              // var gitalk = new Gitalk({
-              //   clientID: '604a98594e8838a93c55',
-              //   clientSecret: '5197cf08644f2580389bb23059c4abb4f0f0ced7',
-              //   repo: 'iBlog',
-              //   owner: 'SunilWang',
-              //   admin: ['SunilWang'],
-              //   id: this.id,
-              //   distractionFreeMode: true,
-              //   title: this.title,
-              //   body: window.href,
-              //   labels: ['Gitalk']
-              // });
-              // gitalk.render('gitalk-container')
-            }else{
-              this.title = '404 not found';
-              this.createTime = '';
-              this.content = '';
-              this.lastEditTime = null;
-              this.tags = [];
-              this.visits = 0;
-              this.nextArticle = null;
-              this.prevArticle = null;
+            } else {
+              this.title = '404 not found'
+              this.createTime = ''
+              this.content = ''
+              this.lastEditTime = null
+              this.tags = []
+              this.visits = 0
+              this.nextArticle = null
+              this.prevArticle = null
             }
           }
-        }).catch(err=>{
-          alert('网络错误,请刷新重试');
         })
-      },
+        .catch(err => {
+          alert('网络错误,请刷新重试')
+        })
     }
   }
+}
 </script>

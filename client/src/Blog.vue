@@ -10,7 +10,7 @@
       </router-view>
     </main>
     <footer class="copyright">
-      <p>Copyright © 2012-2017 .All right reserved. 皖ICP备14010130号-3<p>
+      <p>Copyright © 2016-2020 .All right reserved. 皖ICP备14010130号-3<p>
     </footer>
   </div>
 </template>

@@ -10,7 +10,7 @@
       </router-view>
     </main>
     <footer class="copyright">
-      <p>Copyright © 2016-2020 .All right reserved. 皖ICP备14010130号-3<p>
+      <p>Copyright © 2016-2020 .All right reserved. <a href="http://www.beian.miit.gov.cn" style="color: #7f8c8d;font-size: 1em; font-weight: normal;">网站备案/许可证号：皖ICP备14010130号-3</a><p>
     </footer>
   </div>
 </template>
